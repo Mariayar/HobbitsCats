@@ -22,7 +22,7 @@ class Popup {
       document.removeEventListener('keyup', this._handleEscUp)
     }
     setEventListener() {
-      console.log(this.popup);
+      // console.log(this.popup);
      
       this.popup.addEventListener('click', (evt) => {
       
@@ -37,4 +37,4 @@ class Popup {
     }
   }
   
- 
+ const popups = new Popup('popup-add-cats');

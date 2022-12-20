@@ -1,5 +1,5 @@
 const CONFIG_API = {
-    url: 'https://cats.petiteweb.dev/api/single/mufasalion',
+    url: 'https://cats.petiteweb.dev/api/single/HobbitsCats',
     headers: {
         'Content-type': 'application/json'
     }
@@ -56,3 +56,5 @@ class Api {
 }
 
 const api = new Api(CONFIG_API);
+
+

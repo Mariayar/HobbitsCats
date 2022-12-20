@@ -45,3 +45,5 @@ btnOpenPopupForm.addEventListener('click', () => {
   popupAddCat.open();
 });
 formCatAdd.addEventListener('submit', handleFormAddCat)
+
+api.getAllCats().then((res) => console.log(res));
