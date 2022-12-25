@@ -16,17 +16,13 @@ class Popup {
       document.addEventListener('keyup', this._handleEscUp)
     }
 
-
     close() {
       this.popup.classList.remove('popup_active');
       document.removeEventListener('keyup', this._handleEscUp)
     }
+
     setEventListener() {
-      // console.log(this.popup);
-     
       this.popup.addEventListener('click', (evt) => {
-      
-        console.log(evt.target.closest('.popup__close'));
         if (
           evt.target.classList.contains(this._className) ||
           !!evt.target.closest('.popup__close')
@@ -36,5 +32,3 @@ class Popup {
       });
     }
   }
-  
- const popups = new Popup('popup-add-cats');

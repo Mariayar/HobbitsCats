@@ -1,12 +1,13 @@
 const cardsContainer = document.querySelector('.cards');
 const btnOpenPopupForm = document.querySelector('#add');
+
 const formCatAdd = document.querySelector('#popup-form-cat');
+
 const popupAddCat = new Popup('popup-add-cats');
 popupAddCat.setEventListener();
 
-function serializeForm(elements){
+function serializeForm(elements) {
   const formData = {};
-
   elements.forEach( input => {
       if(input.type === 'submit') return;
 
@@ -16,34 +17,37 @@ function serializeForm(elements){
 
       if(input.type === 'checkbox') {
           formData[input.name] = input.checked;
-      };
-
-  })
-
- return formData;
+      }
+  });
+  return formData;
 }
 
-function handleFormAddCat(e){
-  e.preventDefault();
-  const elementsFormCat = [...formCatAdd.elements];
-  const dataFromForm = serializeForm(elementsFormCat)
-
-  const cardInstance = new Card(dataFromForm, '#card-template');
-  const newCardElement = cardInstance.getElement();
-  cardsContainer.append(newCardElement);
-
-    popupAddCat.close();
-}
-
-cats.forEach(function (catData) {
+function createCat(catData) {
   const cardInstance = new Card(catData, '#card-template');
   const newCardElement = cardInstance.getElement();
   cardsContainer.append(newCardElement);
+}
+
+function handleFormAddCat(e) {
+  e.preventDefault();
+  const elementsFormCat = [...formCatAdd.elements];
+
+  const dataFromForm = serializeForm(elementsFormCat);
+
+  api.addNewCat(dataFromForm).then(() => {
+    createCat(dataFromForm);
+  })
+  popupAddCat.close();
+}
+
+api.getAllCats().then((data) => {
+  data.forEach(function (catData) {
+    createCat(catData);
+  });
 });
 
 btnOpenPopupForm.addEventListener('click', () => {
   popupAddCat.open();
 });
-formCatAdd.addEventListener('submit', handleFormAddCat)
 
-api.getAllCats().then((res) => console.log(res));
+formCatAdd.addEventListener('submit', handleFormAddCat)
