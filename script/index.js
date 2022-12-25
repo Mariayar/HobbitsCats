@@ -30,9 +30,11 @@ function createCat(catData) {
 
 function handleFormAddCat(e) {
   e.preventDefault();
+
   const elementsFormCat = [...formCatAdd.elements];
 
   const dataFromForm = serializeForm(elementsFormCat);
+  formCatAdd.reset(); // отчистка полей при сабмите
 
   api.addNewCat(dataFromForm).then(() => {
     createCat(dataFromForm);
