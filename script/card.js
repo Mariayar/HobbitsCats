@@ -1,29 +1,72 @@
-class Card {
-    constructor(dataCat, selectorTemplate) {
-      this._data = dataCat;
-      this._selectorTemplate = selectorTemplate;
-    }
-  
-    _getTemplate() {
-      return document
-        .querySelector(this._selectorTemplate)
-        .content.querySelector('.card');
-    }
+export class Card {
+  constructor(data, selectorTemplate, handleCatTitle, handleCatImage, handleLikeCard) {
+    this._data = data;
+    this._selectorTemplate = selectorTemplate;
+    this._handleCatTitle = handleCatTitle;
+    this._handleCatImage = handleCatImage;
+    this._handleLikeCard = handleLikeCard;
+  }
 
-    getElement() {
-      this.element = this._getTemplate().cloneNode(true);
-      const cardTitle = this.element.querySelector('.card__name');
-      const cardImage = this.element.querySelector('.card__image');
-      const cardLike = this.element.querySelector('.card__like');
-      cardTitle.textContent = this._data.name;
-      cardImage.src = this._data.image;
+  _getTemplate() {
+    return document.querySelector(this._selectorTemplate).content.querySelector('.card');
+  }
 
-      if(!this._data.favorite) {
-        cardLike.remove()
-      }
-
-      return this.element;
+  _updateViewLike() {
+    if(this._data.favorite) {
+      this.cardLike.classList.add('card__like_active')
+    } else {
+      this.cardLike.classList.remove('card__like_active')
     }
   }
+
+  _setLikeCat = () => {
+    this._data.favorite = !this._data.favorite;
+    this._handleLikeCard(this._data, this);
+  }
+
+  getElement() {
+    this.element = this._getTemplate().cloneNode(true);
+    const cardTitle = this.element.querySelector('.card__name');
+    const cardImage = this.element.querySelector('.card__image');
+    const cardLike = this.element.querySelector('.card__like');
+    
+    cardTitle.textContent = this._data.name;
+    cardImage.src = this._data.image;
+
+    if(!this._data.favorite) {
+      cardLike.remove()
+    }
+
+    return this.element;
+  }
+
+  getData() {
+    return this._data;
+  }
+
+  updateView() {
+    this.cardTitle.textContent = this._data.name;
+    this.cardImage.src = this._data.image;
+
+    this._updateViewLike();
+  }
+
+  getId() {
+    return this._data.id;
+  }
+
+  setData(newData) {
+    this._data = newData;
+  }
+
+  deletView() {
+    this.element.remove();
+    this.element = null;
+  }
   
-  
+  setEventListener() {
+    this.cardTitle.addEventListener('click', ()=> this._handleCatTitle(this));
+    this.cardImage.addEventListener('click', ()=> this._handleCatImage(this._data));
+    this.cardLike.addEventListener('click', this._setLikeCat);
+  }
+}

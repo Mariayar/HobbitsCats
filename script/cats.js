@@ -1,7 +1,7 @@
-const cats = [
+export const cats = [
     {
         "id": 3756823745,
-        "name": "Frodo",
+        "name": "Frodo1",
         "favorite": true,
         "rate": 10,
         "age": 8,

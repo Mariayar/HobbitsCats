@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HobbitsCats</title>
     <script src="https://kit.fontawesome.com/64d776a5db.js" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" defer></script>
     <link rel="stylesheet" href="./css/index.css">
 <body class="page">
     <header class="header">
@@ -13,11 +14,15 @@
             <a href="#" class="logo"
               ><i class="fa-solid fa-paw fa-2x"></i>Cats of Shire</a>
             <button class="btn" id="add"><i class="fa-solid fa-plus"></i></button>
+            <button class="btn" id="login">Login</i></button>
           </div>
     </header>
     <main class="main container">
         <section class="cards">
             <h2 class="visually-hidden">List of cats</h2>
+        </section>
+        <section class="cards cards-users">
+        <section class="cards cards-users"></section> 
         </section>
     </main>
     <footer class="footer">
@@ -29,6 +34,7 @@
                 <a class="socials__link" href="#"><i class="fa-brands fa-telegram socials__icon"></i></a>
         </div>
     </footer>
+        <!-- добавление кота -->
     <div class="popup popup-add-cats">
         <div class="popup__container" >
             <button class="popup__close btn"><i class="fa-solid fa-xmark"></i></button>
@@ -50,17 +56,64 @@
             </form>
         </div>
     </div>
+            <!-- авторизация -->
+    <div class="popup popup-login">
+        <div class="popup__container">
+            <button class="popup__close btn"><i class="fa-solid fa-xmark"></i></button>
+            <h2>Authorization</h2>
+            <form class="form" id="popup-form-login">
+                <input type="email" class="form__input" name="email" required placeholder="email">
+                <input type="password" class="form__input" name="password" placeholder="password">
+                <button type="submit" class="form__btn btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Информация о котиках -->
+
+    <div class="popup popup-cat-info">
+        <div class="popup__container">
+            <button class="popup__close btn popup__close_external"><i class="fa-solid fa-xmark"></i></button>
+            <div class="popup__content"></div>
+        </div>
+    </div>
+
+    <div class="popap popup-image">
+        <div class="popup__container">
+            <button class="popup__close btn popup__close_external"><i class="fa-solid fa-xmark"></i></button>
+            <img src="#" alt="Picture" class="popup__image">
+        </div>
+    </div>
+  
     <template id="card-template">
         <div class="card">
           <img src="https://images.unsplash.com/photo-1624798118458-fb59e82ca1ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80" alt="Image" class="card__image">
           <a href="#" class="card__link"><h3 class="card__name">Cat</h3></a>
           <button class="card__like" aria-label="Like"><i class="fa-solid fa-heart fa-2x"></i></button>
       </div>
-      </template>
-    <script src="./script/cats.js" defer></script>
-    <script src="./script/api.js" defer></script>
-    <script src="./script/card.js" defer></script>
-    <script src="./script/popup.js" defer></script>
-    <script src="./script/index.js" defer></script>
+    </template>
+
+    <template id="cats-info-template">
+        <div class="cat-info">
+            <button class="cat-info__edited"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+            <button class="cat-info__saved cat-info__saved_hidden"><i class="fa-regular fa-pen-to-square"></i>Save</button>
+            <button class="cat-info__deleted"><i class="fa-solid fa-trash"></i>Delete</button>
+
+            <img src="#" class="cat-info__image" loding="lazy">
+            <span class="cat-info__id">ID</span>
+            <div class="cat-info__title">
+                <h2 class="cat-info__name"></h2>
+                <button class="cat-info__favorite"><i class="fa-solid fa-heart fa-2x"></i></button>
+            </div>
+            <span class="cat-info__rate"></span>
+            <div class="cat-info__age">
+                <span class="cat-info__age-val"></span>
+                <span class="cat-info__age-text"></span>
+            </div>
+            <p class="cat-info__desc"></p>
+        </input>
+    </template>
+    
+    <script src="./script/index.js" defer type="module"></script>
 </body>
 </html>
