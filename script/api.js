@@ -1,7 +1,7 @@
 import {cats} from './cats.js';
 
 const CONFIG_API = {
-    url: 'https://cats.petiteweb.dev/api/single/HobbitsCats',
+    url: 'https://cats.petiteweb.dev/api/single/Cartooncats',
     headers: {
         'Content-type': 'application/json',
     }

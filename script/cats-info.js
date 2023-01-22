@@ -1,4 +1,4 @@
-
+import { generateRating, printNumerals } from './utils.js';
 export class CatsInfo {
   constructor(selectorTemplate,
       handleEditCatInfo,

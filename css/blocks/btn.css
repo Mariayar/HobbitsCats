@@ -10,7 +10,7 @@
   gap: 10px;
   /* красота элемента */
   border: none;
-  background-color: var(--bg-secondary-color);
+  background-color: #222222;
   color: var(--text-light-color);
   cursor: pointer;
 }

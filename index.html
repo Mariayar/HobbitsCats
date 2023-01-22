@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HobbitsCats</title>
+    <title>CartoonCats</title>
     <script src="https://kit.fontawesome.com/64d776a5db.js" crossorigin="anonymous"></script> 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" defer></script>
     <link rel="stylesheet" href="./css/index.css">
@@ -12,7 +12,7 @@
     <header class="header">
         <div class="container header__container">
             <a href="#" class="logo"
-              ><i class="fa-solid fa-paw fa-2x"></i>Cats of Shire</a>
+              ><i class="fa-solid fa-paw fa-2x"></i>Cartoon Cats</a>
             <button class="btn" id="add"><i class="fa-solid fa-plus"></i></button>
             <button class="btn" id="login">Login</i></button>
           </div>
@@ -42,10 +42,10 @@
             <form class="form" id="popup-form-cat">
                 <div class="form__image"></div>
                 <input type="number" class="form__input" name="id" min="1" required placeholder="id">
-                <input type="number" class="form__input" name="age" placeholder="Возраст">
-                <input type="text" class="form__input" name="name" required placeholder="Имя">
-                <input type="number" class="form__input" name="rate" placeholder="Рейтинг (0-10)" min="0" max="10">
-                <textarea name="description" class="form__input form__textarea" placeholder="Описание"></textarea>
+                <input type="number" class="form__input" name="age" placeholder="Age">
+                <input type="text" class="form__input" name="name" required placeholder="Name">
+                <input type="number" class="form__input" name="rate" placeholder="Rate (0-10)" min="0" max="10">
+                <textarea name="description" class="form__input form__textarea" placeholder="Description"></textarea>
                 <label class="form__checkbox-wrap">
                     <input type="checkbox" name="favorite" class="form__checkbox " placeholder="">
                     <span class="form__label">Favourite</span>  
@@ -56,6 +56,29 @@
             </form>
         </div>
     </div>
+    <!-- Редактирование кота -->
+    <div class="popup popup-edit-cats">
+        <div class="popup__container">
+          <button class="popup__close btn"><i class="fa-solid fa-xmark"></i></button>
+          <h2>Изменить питомца</h2>
+          <form class="form" id="popup-edit-form-cat">
+            <div class="form__image"></div>
+            <input type="number" id="edit-form-cat__id" class="form__input" name="id" min="1" required placeholder="id">
+            <input type="number" id="edit-form-cat__age" class="form__input" name="age" placeholder="Age">
+            <input type="text" id="edit-form-cat__name" class="form__input" name="name" required placeholder="Name">
+            <input type="number" id="edit-form-cat__rate" class="form__input" name="rate" placeholder="Рейтинг (0-10)" min="0" max="10">
+            <textarea name="description" id="edit-form-cat__desc" class="form__input form__textarea" placeholder="Description"></textarea>
+            <label class="form__checkbox-wrap">
+              <input type="checkbox" id="edit-form-cat__checkbox" name="favorite" class="form__checkbox edit__cat">
+              <span class="form__label">Favourite</span>
+              <span class="form__fake-checkbox"><i class="fa-regular fa-circle-check"></i></span>
+            </label>
+            <input type="url" id="edit-form-cat__url-image" class="form__input form__input_image" name="image" placeholder="Ссылка на фото">
+            <button type="submit" class="form__btn btn">Submit</button>
+            <button type="button" class="form__btn btn del">Delete</button>
+          </form>
+        </div>
+      </div>
             <!-- авторизация -->
     <div class="popup popup-login">
         <div class="popup__container">
@@ -79,7 +102,7 @@
     </div>
 
     <div class="popap popup-image">
-        <div class="popup__container">
+        <div class="popup__container visually-hidden">
             <button class="popup__close btn popup__close_external"><i class="fa-solid fa-xmark"></i></button>
             <img src="#" alt="Picture" class="popup__image">
         </div>
@@ -87,7 +110,7 @@
   
     <template id="card-template">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1624798118458-fb59e82ca1ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80" alt="Image" class="card__image">
+          <img src="#" alt="Image" class="card__image">
           <a href="#" class="card__link"><h3 class="card__name">Cat</h3></a>
           <button class="card__like" aria-label="Like"><i class="fa-solid fa-heart fa-2x"></i></button>
       </div>

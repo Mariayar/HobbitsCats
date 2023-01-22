@@ -3,4 +3,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-size: 20px;
+  color: #222222;
 }
+

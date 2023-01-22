@@ -33,6 +33,7 @@ export class Popup {
       }
     });
   }
+  
   setContent(contentNode) {
     const containerContent = this.popup.querySelector('.popup__content');
     containerContent.innerHTML = '';

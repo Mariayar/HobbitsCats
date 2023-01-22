@@ -12,6 +12,7 @@ const btnOpenPopupLogin = document.querySelector('#login');
 
 const formCatAdd = document.querySelector('#popup-form-cat');
 const formLogin = document.querySelector('#popup-form-login');
+const formCatEdit = document.querySelector('#popup-edit-form-cat');
 
 const popupAddCat = new Popup('popup-add-cats');
 popupAddCat.setEventListener();
@@ -21,6 +22,9 @@ popupLogin.setEventListener();
 
 const popupCatInfo = new Popup('popup-cat-info');
 popupCatInfo.setEventListener();
+
+const popupEditCat = new Popup('popup-edit-cats');
+popupEditCat.setEventListener();
 
 const popupImage = new PopupImage('popup-image');
 popupImage.setEventListener();
@@ -64,16 +68,36 @@ function createCat(data) {
 
 // функция добавления кота
 
-function handleFormAddCat(e) {
+async function handleFormAddCat(e) {
   e.preventDefault();
   const elementsFormCat = [...formCatAdd.elements];
   const dataFromForm = serializeForm(elementsFormCat);
   formCatAdd.reset(); // отчистка полей при сабмите
-  api.addNewCat(dataFromForm).then(() => {
+
+ await api.addNewCat(dataFromForm).then(() => {
     createCat(dataFromForm);
     updateLocalStorage(dataFromForm, { type: 'ADD_CAT' });
-  });
+  })
+    .catch(err => console.log(err));
   popupAddCat.close();
+  openPopupEditCat()
+}
+
+// Функция редактирования кота
+
+function handleEditCatInfo(cardInstance, data) {
+  const {age, description, name, id, image} = data;
+  const elementsFormCat = [...formEditCat.elements];
+  const dataFromForm = serializeForm(elementsFormCat);
+
+  api.updateCatById(id, {age, description, name, image})
+  .then(() => {
+    cardInstance.setData(data);
+    cardInstance.updateView();
+    updateLocalStorage(dataFromForm, {type: 'EDIT_CAT'})
+  })
+   popupEditCatInfo.close();
+
 }
 
 // функция логина
@@ -83,15 +107,15 @@ function handleFormLogin(e) {
   const elementsFormCat = [...formLogin.elements];
   const dataFromForm = serializeForm(elementsFormCat);
   Cookies.set('email', `email=${dataFromForm.email}`);
+  Cookies.set('password', `email=${dataFromForm.password}`);
   btnOpenPopupLogin.classList.add('visually-hidden');
   popupLogin.close();
 }
 
 // печеньки 
 const isAuth = Cookies.get('email');
-if (!isAuth) {
-  popupLogin.open();
-  btnOpenPopupLogin.classList.remove('visually-hidden');
+if (isAuth) {
+  btnOpenPopupLogin.classList.add('visually-hidden');
 }
 
 function handleCatTitle(cardInstance) {
@@ -106,7 +130,7 @@ function handleCatImage(dataCard) {
 
 function handleLike(data, cardInstance) {
   const {id, favorite} = data;
-  api.updateCatById(id, {favorite})
+  api.updateCatById(id, { favorite })
   .then(() => {
     if(cardInstance){
       cardInstance.setData(data);
@@ -124,17 +148,8 @@ function handleCatDelete(cardInstance) {
       updateLocalStorage(cardInstance.getData(), {type: 'DELETE_CAT'});
       popupCatInfo.close();
     })
-}
-
-function handleEditCatInfo(cardInstance, data) {
-  const {age, description, name, id, image} = data;
-  api.updateCatById(id, {age, description, name, image})
-  .then(() => {
-    cardInstance.setData(data);
-    cardInstance.updateView();
-    updateLocalStorage(data, {type: 'EDIT_CAT'})
-    popupCatInfo.close();
-  })
+    .catch(err => console.log(err));
+    popupEditCat.close();
 }
 
 // local storage 
@@ -153,7 +168,9 @@ function checkLocalStorage() {
         createCat(catData);
       });
       updateLocalStorage(data, { type: 'ALL_CATS' });
-    });
+    })
+    .catch(err => console.log(err))
+    .then(openPopupEditCat);
   }
 }
 
@@ -197,3 +214,4 @@ btnOpenPopupLogin.addEventListener('click', () => {
   
 formCatAdd.addEventListener('submit', handleFormAddCat);
 formLogin.addEventListener('submit', handleFormLogin);
+
